@@ -29,6 +29,8 @@ adicionar_carrinho_btn.addEventListener("click", () => {
     
 })
 
+comprar_btn.addEventListener("click", checkout)
+
 function checkProductList(produto) {
     let productExists = false
 
@@ -118,6 +120,15 @@ function calculateTotalPurchaseValue() {
     })
 
     valor_final_compra.textContent = formatacao.format(valor_total_compra)
+}
+
+function checkout() {
+    lista_compras_itens.length = 0
+    lista_nome_produtos.length = 0
+
+    adicionar_compra.value = ''
+    valor_final_compra.textContent = "R$ 0,00"
+    lista_compras.innerHTML = ''
 }
 
 function capitalizarPrimeiraLetra(str) {
