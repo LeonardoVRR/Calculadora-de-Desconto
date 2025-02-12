@@ -3,8 +3,11 @@ const adicionar_compra = document.getElementById("add_purchase")
 const adicionar_carrinho_btn = document.querySelector(".add_to_cart")
 const lista_compras = document.querySelector(".shopping_cart")
 const comprar_btn = document.querySelector(".checkout_btn")
+const selected_item_information = document.querySelector(".item_information_container")
+const estado_do_caixa = document.querySelector(".supermarket_cashier_message").children[0]
 
 let valor_final_compra = document.querySelector("#subtotal_item p")
+let item_selecionado_anterior = null
 
 const lista_compras_itens = []
 const lista_nome_produtos = []
@@ -16,21 +19,22 @@ const formatacao = new Intl.NumberFormat('pt-BR', {
 
 add_purchase_form.addEventListener("submit", (event) => {
 
+    estado_do_caixa.textContent = "CAIXA OCUPADO"
+
     event.preventDefault()
 
     const produto_novo = adicionar_compra.value
 
     if (!checkProductList(produto_novo)) {
-        console.log("Produto Novo")
+        //console.log("Produto Novo")
         add_to_cart(produto_novo)
     }
 
     else {
-        console.log("Produto já na lista de compras")
+        //console.log("Produto já na lista de compras")
         controlProductQuantity(produto_novo)
     }
 
-    
 })
 
 comprar_btn.addEventListener("click", checkout)
@@ -67,7 +71,7 @@ function add_to_cart(produto) {
 
     lista_nome_produtos.push(produto)
 
-    console.log(lista_compras_itens)
+    //console.log(lista_compras_itens)
 
     updateShoppingList(num_produto_novo, codigo_produto_novo, nome_produto, formatacao.format(preco_produto).replace("R$", "").trim(), formatacao.format(preco_final_produto).replace("R$", "").trim(), formatacao.format(desconto_produto).replace("R$", "").trim())
 }
@@ -137,12 +141,6 @@ function updateShoppingList(num_produto = 1, codigo_produto = 0, nome, preco_uni
 
     else {
 
-        // const product_name = lista_compras.children[index].textContent.split("|")[0].trim()
-        // const product_price = lista_compras.children[index].textContent.split("|")[1].trim()
-        // const produtc_discount = lista_compras.children[index].textContent.split("|")[2].trim()
-
-        // lista_compras.children[index].textContent = `${product_name} | ${product_price} | ${produtc_discount} | Qtd: ${quantidade}`
-
         const produtc_qtd = lista_compras.children[1].children[index].children[3]
         produtc_qtd.textContent = lista_compras_itens[index].quantidade
 
@@ -151,8 +149,6 @@ function updateShoppingList(num_produto = 1, codigo_produto = 0, nome, preco_uni
 
         const produtc_total_value = lista_compras.children[1].children[index].children[6]
         produtc_total_value.textContent = (lista_compras_itens[index].valor_total).toFixed(2)
-
-        console.log(lista_compras_itens[index].desconto)
 
     }
 
@@ -175,8 +171,79 @@ function checkout() {
     lista_nome_produtos.length = 0
 
     adicionar_compra.value = ''
-    //valor_final_compra.textContent = "R$ 0,00"
+    valor_final_compra.textContent = "0,00"
     lista_compras.children[1].innerHTML = ''
+    selectedItemInformationReset()
+
+    estado_do_caixa.textContent = "CAIXA LIVRE"
+
+}
+
+lista_compras.addEventListener("click", (event) => {
+
+    const item_parent = event.target.parentNode.parentNode.tagName.toLowerCase()
+
+    const item = event.target.parentNode
+
+    item_parent != "thead" ? displaySelectedItemInformation(item) : alert("Item selecionado inválido")
+
+})
+
+function displaySelectedItemInformation(selected_item) {
+    const item_barcode = selected_item_information.children[0].querySelector(".info").children[0]
+    const unit_value_item = selected_item_information.children[1].querySelector(".info").children[0]
+    const total_item_discount = selected_item_information.children[3].querySelector(".info").children[0]
+    const total_item = selected_item_information.children[2].querySelector(".info").children[0]
+
+    console.log()
+
+    item_barcode.textContent = selected_item.children[1].textContent
+    unit_value_item.textContent = formatacao.format(Number(selected_item.children[4].textContent.replace(".", "").replace("," , ".")))
+    total_item_discount.textContent = formatacao.format(Number(selected_item.children[5].textContent.replace(".", "").replace("," , ".")))
+    total_item.textContent = formatacao.format(Number(selected_item.children[6].textContent.replace(".", "").replace("," , ".")))
+
+    styleSelectedItem(selected_item)
+}
+
+function styleSelectedItem(item) {
+    let item_selecionado_atual = item
+
+    // console.log(`item anterior:`)
+    // console.log(item_selecionado_anterior)
+    // console.log(`item atual:`)
+    // console.log(item_selecionado_atual)
+
+    if (item_selecionado_anterior == null) {
+        item_selecionado_atual.classList.add("selected_item")
+    }
+
+    else if (item_selecionado_atual != item_selecionado_anterior) {
+        item_selecionado_atual.classList.add("selected_item")
+        item_selecionado_anterior.classList.remove("selected_item")
+    }
+
+    else if (item_selecionado_atual == item_selecionado_anterior) {
+        item_selecionado_atual.classList.toggle("selected_item")
+
+        console.log(item_selecionado_atual.classList)
+
+        !item_selecionado_atual.classList.contains("selected_item") ? selectedItemInformationReset() : ""
+        
+    }
+
+    item_selecionado_anterior = item_selecionado_atual
+}
+
+function selectedItemInformationReset() {
+    const item_barcode = selected_item_information.children[0].querySelector(".info").children[0]
+    const unit_value_item = selected_item_information.children[1].querySelector(".info").children[0]
+    const total_item_discount = selected_item_information.children[3].querySelector(".info").children[0]
+    const total_item = selected_item_information.children[2].querySelector(".info").children[0]
+
+    item_barcode.textContent = '0'
+    unit_value_item.textContent = 'R$ 0,00'
+    total_item_discount.textContent = 'R$ 0,00'
+    total_item.textContent = 'R$ 0,00'
 }
 
 function capitalizarPrimeiraLetra(str) {

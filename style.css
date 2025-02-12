@@ -262,6 +262,10 @@
     cursor: pointer;
 }
 
+.selected_item {
+    background-color: #3397fa;
+}
+
 #subtotal_item {  
     grid-column: 1 / 3;
 }
