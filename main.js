@@ -204,9 +204,9 @@ function displaySelectedItemInformation(selected_item) {
     console.log()
 
     item_barcode.textContent = selected_item.children[1].textContent
-    unit_value_item.textContent = formatacao.format(Number(selected_item.children[4].textContent.replace(".", "").replace("," , ".")))
-    total_item_discount.textContent = formatacao.format(Number(selected_item.children[5].textContent.replace(".", "").replace("," , ".")))
-    total_item.textContent = formatacao.format(Number(selected_item.children[6].textContent.replace(".", "").replace("," , ".")))
+    unit_value_item.textContent = formatacao.format(convert_NumberBR_to_NumberUSA(selected_item.children[4].textContent))
+    total_item_discount.textContent = formatacao.format(convert_NumberBR_to_NumberUSA(selected_item.children[5].textContent))
+    total_item.textContent = formatacao.format(convert_NumberBR_to_NumberUSA(selected_item.children[6].textContent))
 
     styleSelectedItem(selected_item)
 }
@@ -250,6 +250,14 @@ function selectedItemInformationReset() {
     unit_value_item.textContent = 'R$ 0,00'
     total_item_discount.textContent = 'R$ 0,00'
     total_item.textContent = 'R$ 0,00'
+}
+
+function payment() {
+    
+}
+
+function convert_NumberBR_to_NumberUSA(number) {
+    return Number(number.replace(/\./g, '').replace("," , "."))  // Remove todos os pontos e substitui a "," pelo "."
 }
 
 function capitalizarPrimeiraLetra(str) {

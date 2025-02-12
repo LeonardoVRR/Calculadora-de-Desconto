@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+main {
+    background-color: #4a739f;
+    height: 100vh;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2%;
+    padding: 10px;
+}
+
+.payment_area {
+
+    background-color: var(--background-color_area);
+    border-radius: var(--border-radius_area);
+    
+    visibility: visible;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.payment_area * {
+    font-family: "Roboto", serif;
+}
+
+.credit_card_machine {
+
+    background-color: #ff6eb600;
+    
+    height: 90%;
+
+    overflow: hidden;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.credit_card_machine > img {
+    height: 90vh;
+    width: auto;
+
+}
+
+.credit_card_machine_screen {
+    background-color: rgba(255, 0, 0, 0);
+    height: 29.5%;
+    width: 66%;
+
+    position: absolute;
+    top: 49%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    grid-template-columns: 1fr;
+
+    border: 1px solid rgba(255, 0, 0, 0);
+
+    overflow: hidden;
+}
+
+.total_value {
+    border-bottom: 1px solid black;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+
+    font-size: 0.9em;
+    width: 100%;
+
+    grid-column: 1;
+    white-space: nowrap;
+}
+
+.total_paid {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #4a739f00;
+    width: 100%;
+    height: 100%;
+
+    font-size: 50px;
+    white-space: nowrap;
+}
+
+.keyboard_number {
+    cursor: pointer;
+}
+
+.shopping_cart_and_payment {
+    grid-column: 2 / -1;
+}
+
+
+
+
+/* .credit_card_machine {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50px;
+
+    background-color: #02a0d5;
+    width: 60%;
+    height: 90%;
+
+} */
+
+/* .credit_card_machine_screen {
+    background-color: #040203;
+
+    border-radius: 30px;
+    overflow: hidden;
+
+    width: 90%;
+    height: 95%;
+
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr;
+}
+
+.purchase_value_area {
+    background-color: rgba(185, 255, 127, 0);
+    padding: 10px;
+
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+
+.total_purchase_value {
+    font-size: 1.6vw;
+}
+
+.total_amount_paid {
+    width: 100%;
+    height: 60%;
+    font-size: 2vw;
+    background-color: #04020300;
+    border: none;
+
+    text-align: center;
+}
+
+.credit_card_machine_keyboard {
+    background-color: rgba(255, 0, 0, 0);
+
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 3fr 1fr;
+}
+
+.keyboard_number {
+    background-color: rgba(0, 100, 0, 0);
+
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.credit_card_machine_keyboard button {
+
+    font-size: 1.7em;
+    font-weight: 500;
+
+    background-color: #ff505000;
+    border: none;
+
+    cursor: pointer;
+}
+
+.credit_card_machine_keyboard button:hover {
+    background-color: #69696938;
+}
+
+.credit_card_machine_keyboard button:active {
+    background-color: #94949438;
+}
+
+.keyboard_number > button:last-child {
+    grid-column: 2 / 3;
+}
+
+.keyboard_options {
+    background-color: rgba(255, 140, 0, 0);
+
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    padding: 20px 0;
+
+}
+
+.credit_card_machine_keyboard img {
+    width: 60%;
+} */

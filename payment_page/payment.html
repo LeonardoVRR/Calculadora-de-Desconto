@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="payment_page_style.css">
+    <title>Payment Page</title>
+</head>
+<body>
+    <main>
+
+        <section class="payment_area">
+            <div class="credit_card_machine">
+
+                <div class="credit_card_machine_screen">
+                    <div class="total_value">
+                        <p>Total:</p>
+                        <p>R$ 0,00</p>
+                    </div>
+                    <div class="total_paid">
+                        <p><sup>R$</sup> 0,00</p>
+                    </div>
+                </div>
+
+                <img src="../img/cielo-flash-maquininha-de-cartao-david-tech_2.png" alt="" usemap="#keyboard" id="mappedImage">
+
+                <map name="keyboard">
+                    <area alt="" data-original-coords="136,765,64,735" data-keyNumber="1" href="#" coords="136,765,64,735" shape="rect">
+                    <area alt="" data-original-coords="149,734,225,765" data-keyNumber="2" href="#" coords="149,734,225,765" shape="rect">
+                    <area alt="" data-original-coords="239,735,312,763" data-keyNumber="3" href="#" coords="239,735,312,763" shape="rect">
+                    <area alt="" data-original-coords="327,735,400,765" data-keyNumber="cancel" href="#" coords="327,735,400,765" shape="rect">
+                    <area alt="" data-original-coords="64,785,137,814" data-keyNumber="4" href="#" coords="64,785,137,814" shape="rect">
+                    <area alt="" data-original-coords=151,785,224,814" data-keyNumber="5" href="#" coords="151,785,224,814" shape="rect">
+                    <area alt="" data-original-coords="239,784,314,815" data-keyNumber="6" href="#" coords="239,784,314,815" shape="rect">
+                    <area alt="" data-original-coords="327,785,401,815" data-keyNumber="deletar" href="#" coords="327,785,401,815" shape="rect">
+                    <area alt="" data-original-coords="63,835,138,865" data-keyNumber="7" href="#" coords="63,835,138,865" shape="rect">
+                    <area alt="" data-original-coords="152,835,225,865" data-keyNumber="8" href="#" coords="152,835,225,865" shape="rect">
+                    <area alt="" data-original-coords="239,834,313,865" data-keyNumber="9" href="#" coords="239,834,313,865" shape="rect">
+                    <area alt="" data-original-coords="152,885,225,914" data-keyNumber="0" href="#" coords="152,885,225,914" shape="rect">
+                    <area alt="" data-original-coords="327,834,326,916,376,914,398,884,402,833,370,833,350,833" data-keyNumber="concluir" href="#" coords="327,834,326,916,376,914,398,884,402,833,370,833,350,833" shape="poly">
+                </map>
+
+            </div>
+        </section>
+        
+        <div class="shopping_cart_and_payment">
+            <div class="shopping_cart_container">
+                <h2 class="shopping_cart_title">LISTA DE PRODUTOS</h2>
+                <div class="container">
+                    <table class="shopping_cart">
+                        <!-- <caption class="shopping_cart_title">LISTA DE PRODUTOS</caption> -->
+                        <thead>
+                            <tr>
+                                <th>N°Item</th>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Qtd</th>
+                                <th>Vlr. Unit.</th>
+                                <th>Desconto</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="item_information" id="subtotal_item">
+                <h2>SUBTOTAL</h2>
+                <div class="info">
+                    <p>0,00</p>
+                </div>
+            </div>
+            <div class="item_information" id="total_received">
+                <h2>TOTAL RECEBIDO</h2>
+                <div class="info">
+                    <p>R$ 0,00</p>
+                </div>
+            </div>
+            <div class="item_information" id="total_change_cash">
+                <h2>TROCO</h2>
+                <div class="info">
+                    <p>R$ 0,00</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="payment_page_script.js"></script>
+</body>
+</html>
