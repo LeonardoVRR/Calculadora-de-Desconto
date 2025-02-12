@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url("fonts/Rubik-Regular.ttf") format("truetype");
+}
+
+:root {
+    --background-color_area: #ffffff;
+    --border-radius_area: 5px;
+
+    --background-color_title: #003f6b;
+    --text_color: #103956;
+    --icon_btn: calc(3vw - 3vh);
+}
+
+.grid-wrapper {
+    background-color: #4a739f;
+    height: 100vh;
+
+    display: grid;
+    grid-template-rows: repeat(6, auto);
+    grid-template-columns: repeat(5, auto);
+    gap: 10px;
+    padding: 10px;
+}
+
+.supermarket_cashier_message {
+    background-color: var(--background-color_area);
+    border-radius: var(--border-radius_area);
+    grid-column: 1 / -1; /* ocupa a linha toda*/
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text_color);
+}
+
+.supermarket_cashier_message > h1 {
+    font-size: 3em;
+    letter-spacing: 2.5px;
+}
+
+.supermarket_logo_container {
+
+    grid-row: 2 / -4;
+    grid-column: 1 / 2;
+
+    background-color: var(--background-color_area);
+    border-radius: var(--border-radius_area);
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.supermarket_logo_container > img {
+    width: 40%;
+}
+
+.supermarket_logo_container > h1 {
+    font-family: 'Rubik', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.item_information_container {
+
+    grid-row: 2 / -4;
+
+    background-color: rgba(255, 127, 80, 0);
+
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.item_information {
+    background-color: var(--background-color_area);
+    border-radius: var(--border-radius_area);
+
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.item_information > h2, .shopping_cart_title {
+    background-color: var(--background-color_title);
+    border-radius: var(--border-radius_area) var(--border-radius_area) 0 0;
+    color: white;
+    padding: 2px 5px;
+    font-size: 1.3em;
+
+    font-weight: 500;
+}
+
+.info {
+    border-radius: 0 0 var(--border-radius_area) var(--border-radius_area);
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 0 10px;
+}
+
+.item_information p {
+    color: var(--text_color);
+    font-size: 1.5em;
+}
+
+.options {
+    grid-column: 1 / 2;
+
+    background-color: var(--background-color_area);
+    border-radius: var(--border-radius_area);
+    
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 10px;
+
+    max-width: 30vw;
+}
+
+.add_purchase_container {
+    background-color: #2affff00;
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px;
+
+    width: 100%;
+}
+
+#add_purchase {
+    padding: 10px 5px;
+    flex: 2;
+}
+
+.add_to_cart {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex: 1;
+
+    height: 80%;
+
+    padding: 10px 5px;
+}
+
+.icon_btn {
+    /* background: rgba(207, 32, 32, 0) url("img/add-to-basket.png") no-repeat center;
+    background-size: contain; */
+
+    height: var(--icon_btn);
+    width: var(--icon_btn);
+}
+
+.checkout_btn {
+    height: 30%;
+    width: 50%;
+
+    cursor: pointer;
+}
+
+.shopping_cart_and_payment {
+    background-color: rgba(255, 129, 224, 0);
+
+    grid-column: 3 / -1;
+    grid-row: 2 / -2;
+
+    display: grid;
+    grid-template-rows: 5fr repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.shopping_cart_container {
+    background-color: var(--background-color_area);
+
+    border-radius: var(--border-radius_area);
+
+    grid-column: 1 / -1;
+
+}
+
+/* Aplica a personalização da barra de rolagem */
+::-webkit-scrollbar {
+    width: 15px;  /* Largura da barra de rolagem (horizontal será controlado por height) */
+    height: 50%; /* Altura da barra de rolagem horizontal */
+}
+
+/* Personaliza o "thumb" (parte da barra de rolagem que você pode arrastar) */
+::-webkit-scrollbar-thumb {
+    background-color: rgb(169, 169, 169); /* Cor de fundo do thumb */
+    border-radius: 10px;         /* Cantos arredondados do thumb */
+}
+
+.shopping_cart {
+    background-color: rgba(168, 168, 168, 0);
+    width: 100%;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 8px 4px;
+
+    position: relative;
+}
+
+.container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    background-color: rgba(0, 255, 255, 0);
+
+    max-height: 52vh;
+}
+
+.shopping_cart_title {
+    font-size: 1.5em;
+    text-align: center;
+
+}
+
+.shopping_cart th:nth-child(2), .shopping_cart td:nth-child(2) {
+    text-align: right;
+}
+
+.shopping_cart th:nth-child(3), .shopping_cart td:nth-child(3) {
+    text-align: left;
+}
+
+.shopping_cart th:nth-child(4), .shopping_cart td:nth-child(4), .shopping_cart th:nth-child(5), .shopping_cart td:nth-child(5), .shopping_cart th:nth-child(6), .shopping_cart td:nth-child(6) {
+    text-align: right;
+}
+
+.shopping_cart thead {
+    position: sticky;
+    top: 0px;
+    background-color: var(--background-color_area);
+    z-index: 10;
+}
+
+#subtotal_item {  
+    grid-column: 1 / 3;
+}

@@ -1,24 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Calcula Desconto</title>
 </head>
 <body>
-    <input type="text" name="" id="add_purchase">
-    <button class="add_to_cart">Adicionar ao carrinho</button>
-    <h1>lista de compras</h1>
-    <ul class="shopping_cart">
-        <!-- <li>
-            <p>Produto: Feijão | Preço: R$ 10,00 | Desconto: R$ 5,00</p>
-        </li> -->
-    </ul>
+    <div class="grid-wrapper">
 
-    <h1>Valor final da compra</h1>
-    <p class="final_purchase_value">R$ 0,00</p>
-    <button class="checkout_btn">Comprar</button>
+        <div class="supermarket_cashier_message">
+            <h1>CAIXA ABERTO</h1>
+        </div>
 
-    <script src="main.js"></script>
+        <div class="supermarket_logo_container">
+            <img src="img/3549891_-_Copia-removebg-preview.png" alt="logo supermercado" class="supermarket_logo">
+            <h1>FRESH LOPES</h1>
+        </div>
+
+        <div class="item_information_container">
+            <div class="item_information">
+                <h2>CÓDIGO DE BARRAS</h2>
+                <div class="info">
+                    <p>984579</p>
+                </div>
+            </div>
+            <div class="item_information">
+                <h2>VALOR UNITÁRIO</h2>
+                <div class="info">
+                    <p>R$ 0,00</p>
+                </div>
+            </div>
+            <div class="item_information">
+                <h2>TOTAL DO ITEM</h2>
+                <div class="info">
+                    <p>R$ 0,00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="shopping_cart_and_payment">
+            <div class="shopping_cart_container">
+                <h2 class="shopping_cart_title">LISTA DE PRODUTOS</h2>
+                <div class="container">
+                    <table class="shopping_cart">
+                        <!-- <caption class="shopping_cart_title">LISTA DE PRODUTOS</caption> -->
+                        <thead>
+                            <tr>
+                                <th>N°Item</th>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Qtd</th>
+                                <th>Vlr. Unit.</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>3874637489</td>
+                                <td>Feijão</td>
+                                <td>1,000</td>
+                                <td>5,69</td>
+                                <td>5,69</td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="item_information" id="subtotal_item">
+                <h2>SUBTOTAL</h2>
+                <div class="info">
+                    <p>0,00</p>
+                </div>
+            </div>
+            <div class="item_information" id="total_received">
+                <h2>TOTAL RECEBIDO</h2>
+                <div class="info">
+                    <p>R$ 0,00</p>
+                </div>
+            </div>
+            <div class="item_information" id="total_change_cash">
+                <h2>TROCO</h2>
+                <div class="info">
+                    <p>R$ 0,00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="options">
+            <form class="add_purchase_container">
+                <input type="text" name="" id="add_purchase" placeholder="Insira o nome do produto" required>
+                <button class="add_to_cart">
+                    <img src="img/add-to-basket.png" class="icon_btn"></img>
+                    Adicionar Produto
+                </button>
+            </form>
+            <button class="checkout_btn">Finalizar Compra</button>
+        </div>
+
+    </div>
+
+    <!--
+    
+        <input type="text" name="" id="add_purchase">
+        <button class="add_to_cart">Adicionar ao carrinho</button>
+        <h1>lista de compras</h1>
+        <ol class="shopping_cart">
+        </ol>
+
+        <h1>Valor final da compra</h1>
+        <p class="final_purchase_value">R$ 0,00</p>
+        <button class="checkout_btn">Comprar</button>
+
+    -->
+
+    <!-- <script src="main.js"></script> -->
 </body>
 </html>
