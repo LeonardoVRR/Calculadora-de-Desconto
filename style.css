@@ -74,12 +74,12 @@
 
 .item_information_container {
 
-    grid-row: 2 / -4;
+    grid-row: 2 / -3;
 
     background-color: rgba(255, 127, 80, 0);
 
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     gap: 20px;
 }
 
@@ -214,10 +214,13 @@
     background-color: rgba(168, 168, 168, 0);
     width: 100%;
     text-align: center;
-    border-collapse: separate;
-    border-spacing: 8px 4px;
+    border-collapse: collapse;
 
     position: relative;
+}
+
+.shopping_cart * {
+    padding: 0 5px;
 }
 
 .container {
@@ -243,7 +246,7 @@
     text-align: left;
 }
 
-.shopping_cart th:nth-child(4), .shopping_cart td:nth-child(4), .shopping_cart th:nth-child(5), .shopping_cart td:nth-child(5), .shopping_cart th:nth-child(6), .shopping_cart td:nth-child(6) {
+.shopping_cart th:nth-child(4), .shopping_cart td:nth-child(4), .shopping_cart th:nth-child(5), .shopping_cart td:nth-child(5), .shopping_cart th:nth-child(6), .shopping_cart td:nth-child(6), .shopping_cart th:nth-child(7), .shopping_cart td:nth-child(7) {
     text-align: right;
 }
 
@@ -252,6 +255,11 @@
     top: 0px;
     background-color: var(--background-color_area);
     z-index: 10;
+}
+
+.shopping_cart tbody tr:hover {
+    background-color: #3397fa;
+    cursor: pointer;
 }
 
 #subtotal_item {  
