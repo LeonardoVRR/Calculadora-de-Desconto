@@ -21,6 +21,10 @@ add_purchase_form.addEventListener("submit", (event) => {
 
     estado_do_caixa.textContent = "CAIXA OCUPADO"
 
+    const som_registrar_produto = document.querySelector(".store-scanner-beep")
+    som_registrar_produto.currentTime = 0
+    som_registrar_produto.play()
+
     event.preventDefault()
 
     const produto_novo = adicionar_compra.value
@@ -176,7 +180,9 @@ function checkout() {
     selectedItemInformationReset()
 
     estado_do_caixa.textContent = "CAIXA LIVRE"
-
+    const som_compra_finalizada = document.querySelector(".cash-register-purchase")
+    som_compra_finalizada.currentTime = 0
+    som_compra_finalizada.play()
 }
 
 lista_compras.addEventListener("click", (event) => {
