@@ -170,12 +170,17 @@
     width: var(--icon_btn);
 }
 
-.checkout_btn {
+.checkout_btn, .pay_btn {
     height: 30%;
     width: 50%;
 
     cursor: pointer;
     margin-bottom: 10px;
+}
+
+.pay_btn a {
+    text-decoration: none;
+    color: black;
 }
 
 .shopping_cart_and_payment {

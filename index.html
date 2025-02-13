@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:," /> <!-- impede que o navegador busque qualquer ícone. -->
     <title>Calcula Desconto</title>
 </head>
 <body>
@@ -73,13 +74,13 @@
                     <p>0,00</p>
                 </div>
             </div>
-            <div class="item_information" id="total_received">
+            <div class="item_information" id="total_received" style="display: none;">
                 <h2>TOTAL RECEBIDO</h2>
                 <div class="info">
                     <p>R$ 0,00</p>
                 </div>
             </div>
-            <div class="item_information" id="total_change_cash">
+            <div class="item_information" id="total_change_cash" style="display: none;">
                 <h2>TROCO</h2>
                 <div class="info">
                     <p>R$ 0,00</p>
@@ -95,7 +96,8 @@
                     Adicionar Produto
                 </button>
             </form>
-            <button class="checkout_btn">Finalizar Compra</button>
+            <!-- <button class="checkout_btn">Finalizar Compra</button> -->
+            <button class="pay_btn"><a href="payment_page/payment.html" target="_self" rel="noopener noreferrer">Finalizar Compra</a></button>
         </div>
     </div>
 
