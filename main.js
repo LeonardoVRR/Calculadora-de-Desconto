@@ -49,7 +49,7 @@ window.addEventListener("load", ()=> {
 
             event.preventDefault()
 
-            const produto_novo = adicionar_compra.value
+            const produto_novo = adicionar_compra.value.toLowerCase()
 
             if (!checkProductList(produto_novo)) {
                 //console.log("Produto Novo")
