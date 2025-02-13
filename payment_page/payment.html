@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="payment_page_style.css">
+    <link rel="stylesheet" href="loading_operation_animation.css">
     <title>Payment Page</title>
 </head>
 <body>
@@ -16,9 +17,11 @@
                 <a href="../index.html" target="_self" rel="noopener noreferrer">Voltar</a>
             </button>
 
+            <div class="credit_card_screen_operation" id="screen_operation_bg_color"></div>
+
             <div class="credit_card_machine">
 
-                <div class="credit_card_machine_screen">
+                <div class="credit_card_screen_payment" id="screen_operation">
                     <div class="total_value">
                         <p>Total:</p>
                         <p>R$ 0,00</p>
@@ -26,6 +29,36 @@
                     <div class="total_paid">
                         <p><sup>R$</sup> 0,00</p>
                     </div>
+                </div>
+
+                <div class="credit_card_screen_processing_payment" id="screen_operation">
+                    
+                    <div class="dot-spinner">
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                        <div class="dot-spinner__dot"></div>
+                    </div>
+
+                    <p>Processando o <br> pagamento</p>
+                </div>
+
+                <div class="credit_card_screen_purchase_approved" id="screen_operation">
+                    <div class="operation_icon_purchase_approved"></div>
+                    
+                    <h1>Pagamento Aprovada</h1>
+                    <p>Total R$ 0,00</p>
+                </div>
+
+                <div class="credit_card_screen_purchase_refused" id="screen_operation">
+                    <div class="operation_icon_purchase_refused"></div>
+
+                    <h1>Pagamento Recusada</h1>
+                    <p>O cartão não tem saldo para realizar esse pagamento</p>
                 </div>
 
                 <img src="../img/cielo-flash-maquininha-de-cartao-david-tech_2.png" alt="" usemap="#keyboard" id="mappedImage">
@@ -90,6 +123,8 @@
                 </div>
             </div>
         </div>
+
+        <audio src="../sounds/cash-register-purchase-87313.mp3" class="cash-register-purchase"></audio>
     </main>
 
     <script src="../main.js"></script>

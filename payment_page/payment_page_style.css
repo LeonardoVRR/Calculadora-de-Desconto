@@ -9,6 +9,10 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+:root {
+    --bg-color_screen_operation: #ffffff;
+}
+
 main {
     background-color: #4a739f;
     height: 100vh;
@@ -73,7 +77,7 @@ main {
 
 }
 
-.credit_card_machine_screen {
+.credit_card_screen_payment {
     background-color: rgba(255, 0, 0, 0);
     height: 29.5%;
     width: 66%;
@@ -130,114 +134,90 @@ main {
     grid-column: 2 / -1;
 }
 
+.credit_card_screen_operation {
+    background-color: var(--bg-color_screen_operation);
 
+    height: 35%;
+    width: 35%;
 
-
-/* .credit_card_machine {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 50px;
-
-    background-color: #02a0d5;
-    width: 60%;
-    height: 90%;
-
-} */
-
-/* .credit_card_machine_screen {
-    background-color: #040203;
-
-    border-radius: 30px;
-    overflow: hidden;
-
-    width: 90%;
-    height: 95%;
-
-    display: grid;
-    grid-template-rows: 1fr 2fr;
-    grid-template-columns: 1fr;
+    position: absolute;
+    top: 50%;
+    left: 49%;
+    transform: translate(-50%, -50%);
 }
 
-.purchase_value_area {
-    background-color: rgba(185, 255, 127, 0);
-    padding: 10px;
+.credit_card_screen_processing_payment, .credit_card_screen_purchase_approved, .credit_card_screen_purchase_refused {
+    height: 29.5%;
+    width: 66%;
 
-    display: grid;
-    grid-template-rows: 1fr 3fr;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    align-items: center;
-}
-
-
-.total_purchase_value {
-    font-size: 1.6vw;
-}
-
-.total_amount_paid {
-    width: 100%;
-    height: 60%;
-    font-size: 2vw;
-    background-color: #04020300;
     border: none;
+
+    position: absolute;
+    top: 49%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+
+    color: white;
 
     text-align: center;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-.credit_card_machine_keyboard {
-    background-color: rgba(255, 0, 0, 0);
+.credit_card_screen_processing_payment {
+    background-color: white;
+    color: black;
+    font-size: 1.2vw;
 
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 3fr 1fr;
-}
-
-.keyboard_number {
-    background-color: rgba(0, 100, 0, 0);
-
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.credit_card_machine_keyboard button {
-
-    font-size: 1.7em;
-    font-weight: 500;
-
-    background-color: #ff505000;
-    border: none;
-
-    cursor: pointer;
-}
-
-.credit_card_machine_keyboard button:hover {
-    background-color: #69696938;
-}
-
-.credit_card_machine_keyboard button:active {
-    background-color: #94949438;
-}
-
-.keyboard_number > button:last-child {
-    grid-column: 2 / 3;
-}
-
-.keyboard_options {
-    background-color: rgba(255, 140, 0, 0);
-
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: 1fr;
     gap: 20px;
-
-    padding: 20px 0;
-
+    
+    visibility: hidden;
 }
 
-.credit_card_machine_keyboard img {
-    width: 60%;
-} */
+.credit_card_screen_purchase_approved {
+    background-color: #0fa844;
+
+    visibility: hidden;
+}
+
+.credit_card_screen_purchase_approved > h1 {
+    font-size: 1.2vw;
+}
+
+.credit_card_screen_purchase_approved > p {
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.credit_card_screen_purchase_refused {
+    background-color: #f05b58;
+
+    visibility: hidden;
+}
+
+.credit_card_screen_purchase_refused > h1 {
+    font-size: 1.2vw;
+}
+
+.credit_card_screen_purchase_refused > p {
+    font-size: 0.9vw;
+}
+
+.operation_icon_purchase_approved, .operation_icon_purchase_refused {
+    width: 25%;
+    height: 25%;
+}
+
+.operation_icon_purchase_approved {
+    background: #0fa844 url("../img/approved\ icon.png") no-repeat center;
+    background-size: contain;
+}
+
+.operation_icon_purchase_refused {
+    background: #f05b58 url("../img/Alert\ icon.png") no-repeat center;
+    background-size: contain;
+}
