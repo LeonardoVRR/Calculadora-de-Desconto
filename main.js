@@ -314,20 +314,24 @@ window.addEventListener("load", ()=> {
         const mapImage = document.getElementById("credit_card_machine_keyboard")
         const lista_compras = document.querySelector(".shopping_cart")
         let valor_final_compra = document.querySelector("#subtotal_item p")
-        const total_paid_txt_maquininha = document.querySelector(".total_paid").children[0].innerHTML.split(" ")[1]
+        const total_paid_txt_maquininha = document.querySelector(".total_paid").children[0]
 
         let subtotal = 0
+
+        //console.log(total_paid_txt_maquininha)
 
         loadShoppingList(lista_compras)
 
         const vlr_total_compras = Array.from(lista_compras.children[1].querySelectorAll("tr"))
-        console.log(vlr_total_compras)
+        //console.log(vlr_total_compras)
 
         vlr_total_compras.forEach(item_vlr_total => {
             subtotal += convert_NumberBR_and_NumberUSA(item_vlr_total.children[6].textContent, "US")
         })
 
         valor_final_compra.textContent = convert_NumberBR_and_NumberUSA(subtotal, "BR")
+
+        let valor_digitado = ""
 
         mapImage.addEventListener("click", (event) => {
 
@@ -346,9 +350,13 @@ window.addEventListener("load", ()=> {
             }
 
             else {
-                const numberSelected = Number(keySelected)
+                //const numberSelected = Number(keySelected)
 
-                console.log(numberSelected)
+                //console.log(numberSelected)
+
+                valor_digitado += keySelected
+
+                total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> ${valor_digitado}</p>`
             }
         })
 
@@ -360,6 +368,23 @@ window.addEventListener("load", ()=> {
             valorAlterado = "R$" + valorAlterado;
             valor.value = valorAlterado;
         }
+
+        const credit_card_machine_screen = document.querySelector('.credit_card_machine_screen');
+        const total_value = document.querySelector('.total_value');
+        const total_paid = document.querySelector('.total_paid');
+
+        ajustarTexto(credit_card_machine_screen, total_value, 15)
+        ajustarTexto(credit_card_machine_screen, total_paid, 50)
+
+        const observer = new MutationObserver(() => {
+            console.log("Texto aumenta")
+            ajustarTexto(credit_card_machine_screen, total_paid, 50)
+        });     
+        
+        observer.observe(total_paid, {
+            childList: true,  // Monitora se há mudanças nos filhos (texto, por exemplo)
+            subtree: true,    // Monitora toda a árvore de elementos internos
+        }); 
 
         remapearImg()
 
@@ -430,3 +455,13 @@ function capitalizarPrimeiraLetra(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// função para adaptar o tamanho da fonte a div 
+function ajustarTexto(container, texto, fontSize) {
+    texto.style.fontSize = `${fontSize}px`;
+    texto.style.whiteSpace = "nowrap"; // Evita que o texto quebre linha
+
+    while (texto.scrollWidth > container.clientWidth && fontSize > 0) {
+        fontSize--;
+        texto.style.fontSize = `${fontSize}px`;
+    }
+}
