@@ -138,7 +138,7 @@ main {
     background-color: var(--bg-color_screen_operation);
 
     height: 35%;
-    width: 35%;
+    width: 35vh;
 
     position: absolute;
     top: 50%;
