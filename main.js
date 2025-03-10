@@ -39,13 +39,20 @@ window.addEventListener("load", ()=> {
 
         adicionar_carrinho_btn.addEventListener("click", () => {
 
+<<<<<<< HEAD
             //event.preventDefault()
+=======
+            event.preventDefault()
+
+            console.log(lista_compras_itens)
+>>>>>>> a99586d7362e4b12c20e083890d6cb31cafe3925
 
             if (adicionar_compra.value != "") {
 
                 
                 console.log(lista_compras_itens)
 
+<<<<<<< HEAD
                 estado_do_caixa.textContent = "CAIXA OCUPADO"
 
                 const som_registrar_produto = document.querySelector(".store-scanner-beep")
@@ -63,6 +70,9 @@ window.addEventListener("load", ()=> {
                     //console.log("Produto já na lista de compras")
                     controlProductQuantity(produto_novo)
                 }
+=======
+            const produto_novo = adicionar_compra.value.toLowerCase()
+>>>>>>> a99586d7362e4b12c20e083890d6cb31cafe3925
 
             }
 
