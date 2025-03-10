@@ -39,6 +39,8 @@ window.addEventListener("load", ()=> {
 
         add_purchase_form.addEventListener("submit", (event) => {
 
+            event.preventDefault()
+
             console.log(lista_compras_itens)
 
             estado_do_caixa.textContent = "CAIXA OCUPADO"
@@ -46,8 +48,6 @@ window.addEventListener("load", ()=> {
             const som_registrar_produto = document.querySelector(".store-scanner-beep")
             som_registrar_produto.currentTime = 0
             som_registrar_produto.play()
-
-            event.preventDefault()
 
             const produto_novo = adicionar_compra.value.toLowerCase()
 
