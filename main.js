@@ -37,28 +37,37 @@ window.addEventListener("load", ()=> {
             calculateTotalPurchaseValue("lista antiga")
         }
 
-        add_purchase_form.addEventListener("submit", (event) => {
+        adicionar_carrinho_btn.addEventListener("click", () => {
 
-            console.log(lista_compras_itens)
+            //event.preventDefault()
 
-            estado_do_caixa.textContent = "CAIXA OCUPADO"
+            if (adicionar_compra.value != "") {
 
-            const som_registrar_produto = document.querySelector(".store-scanner-beep")
-            som_registrar_produto.currentTime = 0
-            som_registrar_produto.play()
+                
+                console.log(lista_compras_itens)
 
-            event.preventDefault()
+                estado_do_caixa.textContent = "CAIXA OCUPADO"
 
-            const produto_novo = adicionar_compra.value.toLowerCase()
+                const som_registrar_produto = document.querySelector(".store-scanner-beep")
+                som_registrar_produto.currentTime = 0
+                som_registrar_produto.play()
 
-            if (!checkProductList(produto_novo)) {
-                //console.log("Produto Novo")
-                add_to_cart(produto_novo)
+                const produto_novo = adicionar_compra.value.toLowerCase()
+
+                if (!checkProductList(produto_novo)) {
+                    //console.log("Produto Novo")
+                    add_to_cart(produto_novo)
+                }
+
+                else {
+                    //console.log("Produto já na lista de compras")
+                    controlProductQuantity(produto_novo)
+                }
+
             }
 
             else {
-                //console.log("Produto já na lista de compras")
-                controlProductQuantity(produto_novo)
+                alert("Nenhum item para adicionar!")
             }
 
         })
