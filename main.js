@@ -9,7 +9,196 @@ const formatacao = new Intl.NumberFormat('pt-BR', {
 
 window.addEventListener("load", ()=> {
 
-    if (window.location.pathname.endsWith('index.html')) {
+    if (window.location.pathname.endsWith('payment.html')) {
+        console.log("Execuntando script do arquivo payment.html")
+        //console.log(lista_compras_itens)
+
+        const mapImage = document.getElementById("credit_card_machine_keyboard")
+        const lista_compras = document.querySelector(".shopping_cart")
+        let valor_final_compra = document.querySelector("#subtotal_item p")
+        const credit_card_machine = document.querySelector('.credit_card_machine');
+        const credit_card_machine_screen_payment = document.querySelector('.credit_card_screen_payment');
+        const total_value = document.querySelector('.total_value');
+        const total_paid = document.querySelector('.total_paid');
+        const total_paid_txt_maquininha = document.querySelector(".total_paid").children[0]
+
+        const total_received = document.getElementById("total_received").children[1].children[0]
+        const total_change_cash = document.getElementById("total_change_cash").children[1].children[0]
+
+        const screen_operation_bg_color = document.getElementById("screen_operation_bg_color")
+        const screen_operation = document.querySelectorAll("#screen_operation")
+
+        let subtotal = 0
+
+        loadShoppingList(lista_compras)
+
+        const vlr_total_compras = Array.from(lista_compras.children[1].querySelectorAll("tr"))
+        //console.log(vlr_total_compras)
+
+        vlr_total_compras.forEach(item_vlr_total => {
+            subtotal += convert_NumberBR_and_NumberUSA(item_vlr_total.children[6].textContent, "US")
+        })
+
+        valor_final_compra.textContent = convert_NumberBR_and_NumberUSA(subtotal, "BR")
+        total_value.children[1].textContent = convert_NumberBR_and_NumberUSA(subtotal, "BR")
+
+        let valor_digitado = ""
+
+        mapImage.addEventListener("click", (event) => {
+
+            const keySelected = event.target.getAttribute("data-keyNumber")
+
+            if (keySelected == "cancelar") {
+                console.log("cancelar")
+
+                valor_digitado = ""
+
+                total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> 0,00</p>`
+            }
+
+            else if (keySelected == "deletar") {
+                console.log("deletar digito")
+
+                valor_digitado = valor_digitado.slice(0,-1)
+
+                total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> ${mascara(valor_digitado)}</p>`
+            }
+
+            else if (keySelected == "concluir") {
+
+                credit_card_machine.style.pointerEvents = "none";
+
+                console.log("concluir pagamento")
+
+                const vlr_pago = mascara(valor_digitado)
+
+                let result = convert_NumberBR_and_NumberUSA(vlr_pago, "US") < subtotal ? true : false
+
+                //console.log(convert_NumberBR_and_NumberUSA(vlr_pago, "US"))
+
+                //console.log(`Subtotal: ${subtotal}\nTotal Pago: ${convert_NumberBR_and_NumberUSA(vlr_pago, "US")}\nResultado: ${result}`)
+
+                screen_operation[0].style.visibility = "hidden"
+                screen_operation[1].style.visibility = "visible"
+
+                setTimeout(() => {
+
+                    screen_operation[1].style.visibility = "hidden"
+
+                    if (result) {
+                        screen_operation[3].style.visibility = "visible"
+                        screen_operation_bg_color.style.backgroundColor = "#f05b58"
+
+                        setTimeout(() => {
+                            
+                            screen_operation[3].style.visibility = "hidden"
+                            screen_operation[0].style.visibility = "visible"
+
+                            screen_operation_bg_color.style.backgroundColor = "#ffffff"
+
+                            valor_digitado = ""
+
+                            total_received.textContent = `R$ ${mascara(valor_digitado)}`
+
+                            total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> 0,00</p>`
+
+                            credit_card_machine.style.pointerEvents = "auto";
+
+                        }, 1000 * 4)
+                    }
+                    
+                    else {
+                        screen_operation[2].style.visibility = "visible"
+                        screen_operation_bg_color.style.backgroundColor = "#0fa844"
+
+                        checkout()
+
+                        const operation_purchase_approved = document.querySelector(".credit_card_screen_purchase_approved")
+
+                        const total_value = document.querySelector(".credit_card_screen_purchase_approved").children[2]
+
+                        total_value.textContent = `Total R$ ${vlr_pago}`
+
+                        ajustarTexto(operation_purchase_approved, total_value, 16)
+
+                        const troco = convert_NumberBR_and_NumberUSA(vlr_pago, "US") - subtotal
+
+                        total_change_cash.textContent = `R$ ${convert_NumberBR_and_NumberUSA(troco, "BR")}`
+                    }
+
+                }, 1000 * 2.5)
+            }
+
+            else {
+                valor_digitado += keySelected
+
+                let current_payment = mascara(valor_digitado)
+
+                total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> ${current_payment}</p>`
+            }
+
+            total_received.textContent = `R$ ${mascara(valor_digitado)}`
+        })
+
+        function mascara(valor) {
+            // Remove todos os não dígitos
+            var valorAlterado = valor.replace(/\D/g, "");
+        
+            // Garante que haja pelo menos 3 dígitos para formar os centavos
+            while (valorAlterado.length <= 2) {
+                valorAlterado = "0" + valorAlterado;
+            }
+        
+            // Insere a vírgula para os centavos
+            valorAlterado = valorAlterado.replace(/(\d+)(\d{2})$/, "$1,$2");
+        
+            // Adiciona pontos a cada três dígitos antes da vírgula
+            valorAlterado = valorAlterado.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        
+            return valorAlterado;
+        }        
+
+        ajustarTexto(credit_card_machine_screen_payment, total_value, 15)
+        ajustarTexto(credit_card_machine_screen_payment, total_paid, 50)
+
+        const observerFontSize = new MutationObserver(() => {
+            //console.log("Texto aumenta")
+            ajustarTexto(credit_card_machine_screen_payment, total_paid, 50)
+        });     
+        
+        observerFontSize.observe(total_paid, {
+            childList: true,  // Monitora se há mudanças nos filhos (texto, por exemplo)
+            subtree: true,    // Monitora toda a árvore de elementos internos
+        });
+        
+        //detecta alterações no tamanho de um elemento
+        const credit_card_machine_resize = new ResizeObserver(() => {
+            //console.log("Alteração no tamanho da maquininha")
+            remapearImg()
+        })
+
+        credit_card_machine_resize.observe(credit_card_machine)
+
+        function checkout() {
+            localStorage.clear();
+        
+            const som_compra_finalizada = document.querySelector(".cash-register-purchase")
+            som_compra_finalizada.currentTime = 0
+            som_compra_finalizada.play()
+
+            setTimeout(()=> {
+                window.location.replace('../index.html');
+            }, 1000 * 2.5)
+        }
+
+        remapearImg()
+
+    }
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+
+    else  {
 
         console.log("Execuntando script do arquivo index.html")
 
@@ -294,199 +483,6 @@ window.addEventListener("load", ()=> {
             total_item_discount.textContent = 'R$ 0,00'
             total_item.textContent = 'R$ 0,00'
         }
-        
-        function payment() {
-            
-        }
-
-    }
-
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-
-    else if (window.location.pathname.endsWith('payment.html')) {
-        console.log("Execuntando script do arquivo payment.html")
-        //console.log(lista_compras_itens)
-
-        const mapImage = document.getElementById("credit_card_machine_keyboard")
-        const lista_compras = document.querySelector(".shopping_cart")
-        let valor_final_compra = document.querySelector("#subtotal_item p")
-        const credit_card_machine = document.querySelector('.credit_card_machine');
-        const credit_card_machine_screen_payment = document.querySelector('.credit_card_screen_payment');
-        const total_value = document.querySelector('.total_value');
-        const total_paid = document.querySelector('.total_paid');
-        const total_paid_txt_maquininha = document.querySelector(".total_paid").children[0]
-
-        const total_received = document.getElementById("total_received").children[1].children[0]
-        const total_change_cash = document.getElementById("total_change_cash").children[1].children[0]
-
-        const screen_operation_bg_color = document.getElementById("screen_operation_bg_color")
-        const screen_operation = document.querySelectorAll("#screen_operation")
-
-        let subtotal = 0
-
-        loadShoppingList(lista_compras)
-
-        const vlr_total_compras = Array.from(lista_compras.children[1].querySelectorAll("tr"))
-        //console.log(vlr_total_compras)
-
-        vlr_total_compras.forEach(item_vlr_total => {
-            subtotal += convert_NumberBR_and_NumberUSA(item_vlr_total.children[6].textContent, "US")
-        })
-
-        valor_final_compra.textContent = convert_NumberBR_and_NumberUSA(subtotal, "BR")
-        total_value.children[1].textContent = convert_NumberBR_and_NumberUSA(subtotal, "BR")
-
-        let valor_digitado = ""
-
-        mapImage.addEventListener("click", (event) => {
-
-            const keySelected = event.target.getAttribute("data-keyNumber")
-
-            if (keySelected == "cancelar") {
-                console.log("cancelar")
-
-                valor_digitado = ""
-
-                total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> 0,00</p>`
-            }
-
-            else if (keySelected == "deletar") {
-                console.log("deletar digito")
-
-                valor_digitado = valor_digitado.slice(0,-1)
-
-                total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> ${mascara(valor_digitado)}</p>`
-            }
-
-            else if (keySelected == "concluir") {
-
-                credit_card_machine.style.pointerEvents = "none";
-
-                console.log("concluir pagamento")
-
-                const vlr_pago = mascara(valor_digitado)
-
-                let result = convert_NumberBR_and_NumberUSA(vlr_pago, "US") < subtotal ? true : false
-
-                //console.log(convert_NumberBR_and_NumberUSA(vlr_pago, "US"))
-
-                //console.log(`Subtotal: ${subtotal}\nTotal Pago: ${convert_NumberBR_and_NumberUSA(vlr_pago, "US")}\nResultado: ${result}`)
-
-                screen_operation[0].style.visibility = "hidden"
-                screen_operation[1].style.visibility = "visible"
-
-                setTimeout(() => {
-
-                    screen_operation[1].style.visibility = "hidden"
-
-                    if (result) {
-                        screen_operation[3].style.visibility = "visible"
-                        screen_operation_bg_color.style.backgroundColor = "#f05b58"
-
-                        setTimeout(() => {
-                            
-                            screen_operation[3].style.visibility = "hidden"
-                            screen_operation[0].style.visibility = "visible"
-
-                            screen_operation_bg_color.style.backgroundColor = "#ffffff"
-
-                            valor_digitado = ""
-
-                            total_received.textContent = `R$ ${mascara(valor_digitado)}`
-
-                            total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> 0,00</p>`
-
-                            credit_card_machine.style.pointerEvents = "auto";
-
-                        }, 1000 * 4)
-                    }
-                    
-                    else {
-                        screen_operation[2].style.visibility = "visible"
-                        screen_operation_bg_color.style.backgroundColor = "#0fa844"
-
-                        checkout()
-
-                        const operation_purchase_approved = document.querySelector(".credit_card_screen_purchase_approved")
-
-                        const total_value = document.querySelector(".credit_card_screen_purchase_approved").children[2]
-
-                        total_value.textContent = `Total R$ ${vlr_pago}`
-
-                        ajustarTexto(operation_purchase_approved, total_value, 16)
-
-                        const troco = convert_NumberBR_and_NumberUSA(vlr_pago, "US") - subtotal
-
-                        total_change_cash.textContent = `R$ ${convert_NumberBR_and_NumberUSA(troco, "BR")}`
-                    }
-
-                }, 1000 * 2.5)
-            }
-
-            else {
-                valor_digitado += keySelected
-
-                let current_payment = mascara(valor_digitado)
-
-                total_paid_txt_maquininha.innerHTML = `<p><sup>R$</sup> ${current_payment}</p>`
-            }
-
-            total_received.textContent = `R$ ${mascara(valor_digitado)}`
-        })
-
-        function mascara(valor) {
-            // Remove todos os não dígitos
-            var valorAlterado = valor.replace(/\D/g, "");
-        
-            // Garante que haja pelo menos 3 dígitos para formar os centavos
-            while (valorAlterado.length <= 2) {
-                valorAlterado = "0" + valorAlterado;
-            }
-        
-            // Insere a vírgula para os centavos
-            valorAlterado = valorAlterado.replace(/(\d+)(\d{2})$/, "$1,$2");
-        
-            // Adiciona pontos a cada três dígitos antes da vírgula
-            valorAlterado = valorAlterado.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-        
-            return valorAlterado;
-        }        
-
-        ajustarTexto(credit_card_machine_screen_payment, total_value, 15)
-        ajustarTexto(credit_card_machine_screen_payment, total_paid, 50)
-
-        const observerFontSize = new MutationObserver(() => {
-            //console.log("Texto aumenta")
-            ajustarTexto(credit_card_machine_screen_payment, total_paid, 50)
-        });     
-        
-        observerFontSize.observe(total_paid, {
-            childList: true,  // Monitora se há mudanças nos filhos (texto, por exemplo)
-            subtree: true,    // Monitora toda a árvore de elementos internos
-        });
-        
-        //detecta alterações no tamanho de um elemento
-        const credit_card_machine_resize = new ResizeObserver(() => {
-            //console.log("Alteração no tamanho da maquininha")
-            remapearImg()
-        })
-
-        credit_card_machine_resize.observe(credit_card_machine)
-
-        function checkout() {
-            localStorage.clear();
-        
-            const som_compra_finalizada = document.querySelector(".cash-register-purchase")
-            som_compra_finalizada.currentTime = 0
-            som_compra_finalizada.play()
-
-            setTimeout(()=> {
-                window.location.replace('../index.html');
-            }, 1000 * 2.5)
-        }
-
-        remapearImg()
 
     }
 })
