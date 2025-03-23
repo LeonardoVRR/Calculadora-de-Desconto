@@ -15,7 +15,7 @@
 O Sistema de Caixa de Supermercado é uma aplicação web simples e eficiente desenvolvida com HTML, CSS e JavaScript, projetada para simular o processo de registro de vendas em um caixa de supermercado.
 
 ## Objetivo do projeto
-Desenvolver um sistema básico de caixa de supermercado para registrar e calcular vendas, aplicando técnicas como CSS Grid para o layout, explorando o uso da tag <map> do HTML e atendendo ao desafio de criar uma lista de produtos com desconto quando seu preço ultrapassar um valor específico.
+Desenvolver um sistema básico de caixa de supermercado para registrar e calcular vendas, aplicando técnicas como CSS Grid para o layout, explorando o uso da tag "MAP" do HTML e atendendo ao desafio de criar uma lista de produtos com desconto quando seu preço ultrapassar um valor específico.
 
 ## Pré-requisitos
 não é necessário nenhum pré-requisito é só acessar o projeto pelo link disponibilizado em [Acesso ao Projeto](#acesso-ao-projeto) e utiliza-lo.
