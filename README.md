@@ -1,5 +1,5 @@
 <h1 align="center">
-    Sistema de supermercado
+    VendaNet
 </h1>
 
 ## Índice
