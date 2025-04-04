@@ -30,7 +30,7 @@ não é necessário nenhum pré-requisito é só acessar o projeto pelo link dis
 
 
 ## Acesso ao Projeto
-para acessar o projeto utilize o seguinte link: https://leonardovrr.github.io/Calculadora-de-Desconto/
+para acessar o projeto utilize o seguinte link: https://leonardovrr.github.io/VendaNet/
 
 
 ## Tecnologias utilizadas
